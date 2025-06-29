@@ -1,5 +1,4 @@
 import { operators, size, margin } from '../data/operators.jsx';
-import React from 'react';
 
 export default ({ setDroppingItem }) => {
     const onDragStart = (e, gateId, isCustomGate) => {

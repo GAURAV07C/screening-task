@@ -99,6 +99,21 @@ export default ({ droppingItem }) => {
         setDraggedItemId(null);
     }
 
+
+    //  handle toggle xray
+    const handleToggleXray = (itemId, expanded, componentsLength) => {
+      const updatedLayout = layout.map((item) => {
+        if (item.i === itemId) {
+          return {
+            ...item,
+            w: expanded ? componentsLength : 1,
+          };
+        }
+        return item;
+      });
+      setLayout(updatedLayout);
+    };
+
     return (
         <div className='relative bg-white border-2 border-gray-200 m-2 shadow-lg rounded-lg'
             style={{
@@ -171,21 +186,22 @@ export default ({ droppingItem }) => {
                         return null;
                     }
                     return (
-                        <div
-                            className="grid-item relative group"
-                            data-grid={item}
-                            key={`${item.i}`}
-                        >
-                            <Operator
-                                itemId={item.i}
-                                symbol={gate.icon}
-                                height={gate.height}
-                                width={gate.width}
-                                fill={gate.fill}
-                                isCustom={gate.isCustom}
-                                components={gate.components ?? []}
-                            />
-                        </div>
+                      <div
+                        className="grid-item relative group"
+                        data-grid={item}
+                        key={`${item.i}`}
+                      >
+                        <Operator
+                          itemId={item.i}
+                          symbol={gate.icon}
+                          height={gate.height}
+                          width={gate.width}
+                          fill={gate.fill}
+                          isCustom={gate.isCustom}
+                          components={gate.components ?? []}
+                          onToggleXray={handleToggleXray}
+                        />
+                      </div>
                     );
                 })}
             </ReactGridLayout>
